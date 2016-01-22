@@ -14,7 +14,7 @@ from time import sleep
 # Board IO Pin for sensor
 sensorPin = 10;
 # Setup lock
-irq_lock = Lock(False)
+irq_lock = Lock()
 
 # Interrupt Service Routine
 def playSound(channel):
