@@ -8,7 +8,7 @@ from time import sleep
 import RPi.GPIO as GPIO
 
 # Board IO Pin for sensor
-sensorPin = 8;
+sensorPin = 10;
 
 # Initialize pins
 GPIO.setmode(GPIO.BOARD)
