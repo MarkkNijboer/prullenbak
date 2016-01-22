@@ -20,7 +20,7 @@ pygame.mixer.init()
 # Loop
 while 1:
     # If sensor port is HIGH
-    if not GPIO.input(sensorPin):
+    if GPIO.input(sensorPin):
         # Get random file from 'sounds' folder
         directory = "sounds/"
         soundFile = random.choice(os.listdir(directory))
