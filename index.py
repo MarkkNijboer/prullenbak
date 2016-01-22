@@ -19,25 +19,25 @@ called = None
 # Interrupt Service Routine
 def playSound(channel):
   if called is None or called <= time.time() - 1:
-  # Get random file from 'sounds' folder
-  directory = "sounds/"
-  soundFile = random.choice(os.listdir(directory))
+    # Get random file from 'sounds' folder
+    directory = "sounds/"
+    soundFile = random.choice(os.listdir(directory))
 
-  # Initialize player
-  pygame.mixer.init()
+    # Initialize player
+    pygame.mixer.init()
 
-  # Play sound
-  pygame.mixer.music.load(directory+soundFile)
-  pygame.mixer.music.play()
+    # Play sound
+    pygame.mixer.music.load(directory+soundFile)
+    pygame.mixer.music.play()
 
-  # Wait until sound ends playing
-  while pygame.mixer.music.get_busy() == True:
-    continue
+    # Wait until sound ends playing
+    while pygame.mixer.music.get_busy() == True:
+      continue
 
-  # Uninitialize player to prevent hizz noise
-  pygame.mixer.stop()
-  # Save current time
-  called = time.time()
+    # Uninitialize player to prevent hizz noise
+    pygame.mixer.stop()
+    # Save current time
+    called = time.time()
 
 # Catch Keyboardinterrupt to cleanup GPIO channels
 def signal_handler(signal, frame):
