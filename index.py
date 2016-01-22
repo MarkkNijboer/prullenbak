@@ -7,15 +7,18 @@ import random
 import RPi.GPIO as GPIO
 import signal
 import sys
+import time
 
 from threading import Lock
-from time import sleep
 
 # Board IO Pin for sensor
 sensorPin = 10;
+# Last time called
+called = None
 
 # Interrupt Service Routine
 def playSound(channel):
+  if called is None or called =< time.time() - 1:
   # Get random file from 'sounds' folder
   directory = "sounds/"
   soundFile = random.choice(os.listdir(directory))
@@ -33,6 +36,8 @@ def playSound(channel):
 
   # Uninitialize player to prevent hizz noise
   pygame.mixer.stop()
+  # Save current time
+  called = time.time()
 
 # Catch Keyboardinterrupt to cleanup GPIO channels
 def signal_handler(signal, frame):
@@ -49,4 +54,4 @@ GPIO.add_event_detect(sensorPin, GPIO.BOTH, callback=playSound)
 
 # Infinite loop
 while True:
-    sleep(1)
+    time.sleep(1)
