@@ -18,7 +18,7 @@ irq_lock = Lock()
 
 # Interrupt Service Routine
 def playSound(channel):
-  if not irq_lock.acquire():
+  if irq_lock.acquire():
     # Get random file from 'sounds' folder
     directory = "sounds/"
     soundFile = random.choice(os.listdir(directory))
