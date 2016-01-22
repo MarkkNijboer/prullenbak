@@ -13,7 +13,7 @@ sensorPin = 10;
 
 
 # Interrupt Service Routine
-def playSound:
+def playSound():
   # Get random file from 'sounds' folder
   directory = "sounds/"
   soundFile = random.choice(os.listdir(directory))
