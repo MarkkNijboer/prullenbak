@@ -11,11 +11,13 @@
 #    GPIO.output(8, True)
 #    sleep(1)
 
+import os, random
 import pygame
 
+soundFile = random.choice(os.listdir("sounds/"))
 
 pygame.mixer.init()
-pygame.mixer.music.load("offer_x.wav")
+pygame.mixer.music.load(soundFile)
 pygame.mixer.music.play()
 while pygame.mixer.music.get_busy() == True:
     continue
