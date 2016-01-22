@@ -18,6 +18,9 @@ called = None
 
 # Interrupt Service Routine
 def playSound(channel):
+  # Get 'called' into scope
+  global called
+
   if called is None or called <= time.time() - 1:
     # Get random file from 'sounds' folder
     directory = "sounds/"
