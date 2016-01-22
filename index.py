@@ -23,7 +23,7 @@ while 1:
     directory = "sounds/"
     soundFile = random.choice(os.listdir(directory))
 
-    # Initialize sound
+    # Initialize player
     pygame.mixer.init()
 
     # Play sound
@@ -33,3 +33,6 @@ while 1:
     # Wait until sound ends playing
     while pygame.mixer.music.get_busy() == True:
       continue
+
+    # Uninitialize player to prevent hizz noise
+    pygame.mixer.stop()
