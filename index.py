@@ -45,7 +45,7 @@ signal.signal(signal.SIGINT, signal_handler)
 GPIO.setmode(GPIO.BOARD)
 GPIO.setup(sensorPin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 # Setup interrupt
-GPIO.add_event_detect(sensorPin, GPIO.RISING, callback=playSound)
+GPIO.add_event_detect(sensorPin, GPIO.BOTH, callback=playSound)
 
 # Infinite loop
 while True:
