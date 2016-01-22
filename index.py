@@ -23,7 +23,8 @@ def playSound(channel):
 
   if called is None or called <= time.time() - 1:
     # Get random file from 'sounds' folder
-    directory = "sounds/"
+    directory = os.path.dirname(os.path.abspath(__file__))+"sounds/"
+    print(directory)
     soundFile = random.choice(os.listdir(directory))
 
     # Initialize player
