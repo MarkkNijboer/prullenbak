@@ -1,24 +1,34 @@
-#from time import sleep
-
-#import RPi.GPIO as GPIO
 
 
-#GPIO.setmode(GPIO.BOARD)
-#GPIO.setup(8, GPIO.OUT)
-#while 1:
-#    GPIO.output(8, False)
-#    sleep(1)
-#    GPIO.output(8, True)
-#    sleep(1)
-
-import os, random
+import os
+import random
 import pygame
 
-directory = "sounds/"
-soundFile = random.choice(os.listdir(directory))
+from time import sleep
+import RPi.GPIO as GPIO
 
+# Board IO Pin for sensor
+sensorPin = 8;
+
+# Initialize pins
+GPIO.setmode(GPIO.BOARD)
+GPIO.setup(sensorPin, GPIO.IN)
+
+# Initialize sound
 pygame.mixer.init()
-pygame.mixer.music.load(directory+soundFile)
-pygame.mixer.music.play()
-while pygame.mixer.music.get_busy() == True:
-    continue
+
+# Loop
+while 1:
+    # If sensor port is HIGH
+    if GPIO.input(sensorPin):
+        # Get random file from 'sounds' folder
+        directory = "sounds/"
+        soundFile = random.choice(os.listdir(directory))
+
+        # Play sound
+        pygame.mixer.music.load(directory+soundFile)
+        pygame.mixer.music.play()
+
+        # Wait until sound ends playing
+        while pygame.mixer.music.get_busy() == True:
+            continue
