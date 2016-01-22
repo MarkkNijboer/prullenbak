@@ -1,11 +1,12 @@
-
+# Copyright 2016 PuurIDee
+# Author Mark Nijboer
 
 import os
-import random
 import pygame
+import random
+import RPi.GPIO as GPIO
 
 from time import sleep
-import RPi.GPIO as GPIO
 
 # Board IO Pin for sensor
 sensorPin = 10;
@@ -14,21 +15,21 @@ sensorPin = 10;
 GPIO.setmode(GPIO.BOARD)
 GPIO.setup(sensorPin, GPIO.IN)
 
-# Initialize sound
-pygame.mixer.init()
-
 # Loop
 while 1:
-    # If sensor port is HIGH
-    if GPIO.input(sensorPin):
-        # Get random file from 'sounds' folder
-        directory = "sounds/"
-        soundFile = random.choice(os.listdir(directory))
+  # If sensor port is HIGH
+  if not GPIO.input(sensorPin):
+    # Get random file from 'sounds' folder
+    directory = "sounds/"
+    soundFile = random.choice(os.listdir(directory))
 
-        # Play sound
-        pygame.mixer.music.load(directory+soundFile)
-        pygame.mixer.music.play()
+    # Initialize sound
+    pygame.mixer.init()
 
-        # Wait until sound ends playing
-        while pygame.mixer.music.get_busy() == True:
-            continue
+    # Play sound
+    pygame.mixer.music.load(directory+soundFile)
+    pygame.mixer.music.play()
+
+    # Wait until sound ends playing
+    while pygame.mixer.music.get_busy() == True:
+      continue
