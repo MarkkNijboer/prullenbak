@@ -9,7 +9,6 @@ import signal
 import sys
 import time
 
-from threading import Lock
 
 # Board IO Pin for sensor
 sensorPin = 10;
@@ -21,8 +20,8 @@ def playSound(channel):
   # Get 'called' into scope
   global called
 
+  # Check whether last time called was at least a second ago
   if called is None or called <= time.time() - 1:
-
     # Get absolute path to 'sounds' folder
     directory = os.path.dirname(os.path.abspath(__file__))+"/sounds/"
     # Get random file from 'sounds' folder
@@ -35,7 +34,7 @@ def playSound(channel):
     pygame.mixer.music.load(directory+soundFile)
     pygame.mixer.music.play()
 
-    # Wait until sound ends playing
+    # Wait until sound stops playing
     while pygame.mixer.music.get_busy() == True:
       continue
 
@@ -48,14 +47,16 @@ def playSound(channel):
 def signal_handler(signal, frame):
   GPIO.cleanup()
   sys.exit(0)
+# Register Keyboardinterrupt
 signal.signal(signal.SIGINT, signal_handler)
 
 
 # Initialize pins
 GPIO.setmode(GPIO.BOARD)
+# Setup sensor pin and set rest mode to HIGH output.
 GPIO.setup(sensorPin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-# Setup interrupt
-GPIO.add_event_detect(sensorPin, GPIO.BOTH, callback=playSound)
+# Register interrupt for a falling signal: HIGH -> LOW
+GPIO.add_event_detect(sensorPin, GPIO.FALLING, callback=playSound)
 
 # Infinite loop
 while True:
