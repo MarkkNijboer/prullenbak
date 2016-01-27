@@ -62,7 +62,7 @@ signal.signal(signal.SIGINT, signal_handler)
 # Initialize pins
 GPIO.setmode(GPIO.BOARD)
 # Setup sensor pin and set rest mode to HIGH output.
-GPIO.setup(sensorPin, GPIO.IN)
+GPIO.setup(sensorPin, GPIO.IN, GPIO.PUD_UP)
 # Register interrupt for a falling signal: HIGH -> LOW
 GPIO.add_event_detect(sensorPin, GPIO.FALLING, callback=playSound)
 
