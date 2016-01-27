@@ -26,7 +26,7 @@ def playSound(channel):
     # Get absolute path to 'sounds' folder
     directory = os.path.dirname(os.path.abspath(__file__))+"/sounds/"
     # Get random file from 'sounds' folder
-    soundFile = random.choice(os.listdir(directory))
+    soundFile = str(random.choice(os.listdir(directory)))
 
     # Initialize player
     pygame.mixer.init()
