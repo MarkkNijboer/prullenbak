@@ -11,7 +11,7 @@ import time
 
 
 # Board IO Pin for sensor
-sensorPin = 10;
+sensorPin = 8;
 # Last time called
 called = None
 
@@ -54,9 +54,9 @@ signal.signal(signal.SIGINT, signal_handler)
 # Initialize pins
 GPIO.setmode(GPIO.BOARD)
 # Setup sensor pin and set rest mode to HIGH output.
-GPIO.setup(sensorPin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(sensorPin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 # Register interrupt for a falling signal: HIGH -> LOW
-GPIO.add_event_detect(sensorPin, GPIO.FALLING, callback=playSound)
+GPIO.add_event_detect(sensorPin, GPIO.RISING, callback=playSound)
 
 # Infinite loop
 while True:
