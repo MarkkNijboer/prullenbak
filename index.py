@@ -15,12 +15,6 @@ sensorPin = 10;
 # Last time called
 called = None
 
-# Give the sensor some time to calibrate
-print "Sensor Calibration in Progress...";
-time.sleep(30)
-print "Sensor Calibration Completed";
-print "Sensor Reading Active";
-
 # Interrupt Service Routine
 def playSound(channel):
   # Get 'called' into scope
@@ -28,8 +22,6 @@ def playSound(channel):
 
   # Check whether last time called was at least a second ago
   if called is None or called <= time.time() - 1:
-
-    print "Motion detected"
     # Get absolute path to 'sounds' folder
     directory = os.path.dirname(os.path.abspath(__file__))+"/sounds/"
     # Get random file from 'sounds' folder
@@ -62,7 +54,7 @@ signal.signal(signal.SIGINT, signal_handler)
 # Initialize pins
 GPIO.setmode(GPIO.BOARD)
 # Setup sensor pin and set rest mode to HIGH output.
-GPIO.setup(sensorPin, GPIO.IN, GPIO.PUD_UP)
+GPIO.setup(sensorPin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 # Register interrupt for a falling signal: HIGH -> LOW
 GPIO.add_event_detect(sensorPin, GPIO.FALLING, callback=playSound)
 
