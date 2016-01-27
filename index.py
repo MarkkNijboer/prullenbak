@@ -1,5 +1,13 @@
 # Copyright 2016 PuurIDee All Rights Reserved
 # Author Mark Nijboer
+#
+# Note:
+# There is a small delay between the sounds. This happens because the sensor
+# needs some time to find out the motion is over. There also is a delay of
+# about 2.5 seconds in which the sensor blocks the incomming signal. All in all
+# it takes about five seconds before the sensor can pick up motion again.
+#
+
 
 import os
 import pygame
@@ -11,7 +19,7 @@ import time
 
 
 # Board IO Pin for sensor
-sensorPin = 10;
+sensorPin = 10
 # Last time called
 called = None
 
@@ -25,7 +33,7 @@ def playSound(channel):
     # Get absolute path to 'sounds' folder
     directory = os.path.dirname(os.path.abspath(__file__))+"/sounds/"
     # Get random file from 'sounds' folder
-    soundFile = str(random.choice(os.listdir(directory)))
+    soundFile = random.choice(os.listdir(directory))
 
     # Initialize player
     pygame.mixer.init()
@@ -47,6 +55,7 @@ def playSound(channel):
 def signal_handler(signal, frame):
   GPIO.cleanup()
   sys.exit(0)
+  
 # Register Keyboardinterrupt
 signal.signal(signal.SIGINT, signal_handler)
 
@@ -55,9 +64,9 @@ signal.signal(signal.SIGINT, signal_handler)
 GPIO.setmode(GPIO.BOARD)
 # Setup sensor pin and set rest mode to HIGH output.
 GPIO.setup(sensorPin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-# Register interrupt for a falling signal: HIGH -> LOW
+# Register interrupt for a rising signal: LOW -> HIGH
 GPIO.add_event_detect(sensorPin, GPIO.RISING, callback=playSound)
 
-# Infinite loop
+# Infinite loop, wait for interrupt
 while True:
     time.sleep(1)
