@@ -15,6 +15,12 @@ sensorPin = 10;
 # Last time called
 called = None
 
+# Give the sensor some time to calibrate
+print "Sensor Calibration in Progress...";
+time.sleep(30)
+print "Sensor Calibration Completed";
+print "Sensor Reading Active";
+
 # Interrupt Service Routine
 def playSound(channel):
   # Get 'called' into scope
