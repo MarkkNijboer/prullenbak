@@ -6,7 +6,5 @@ GPIO.setmode(GPIO.BOARD)
 GPIO.setup(sensorPin, GPIO.IN)
 
 while True:
-    if GPIO.input(sensorPin) == GPIO.HIGH:
-        print "YAAAHHH!!"
-    else:
+    if not GPIO.input(sensorPin) == GPIO.HIGH:
         print "NEEE"
