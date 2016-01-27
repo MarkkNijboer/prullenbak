@@ -32,8 +32,6 @@ def playSound(channel):
     pygame.mixer.init()
 
     # Play sound
-
-    print "Playing: " + directory+soundFile
     pygame.mixer.music.load(directory+soundFile)
     pygame.mixer.music.play()
 
