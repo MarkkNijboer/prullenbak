@@ -33,6 +33,7 @@ def playSound(channel):
 
     # Play sound
     pygame.mixer.music.load(directory+soundFile)
+    print "Playing: " + directory+soundFile
     pygame.mixer.music.play()
 
     # Wait until sound stops playing
