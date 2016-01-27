@@ -19,6 +19,7 @@ called = None
 def playSound(channel):
   # Get 'called' into scope
   global called
+  print "Motion detected"
 
   # Check whether last time called was at least a second ago
   if called is None or called <= time.time() - 1:
