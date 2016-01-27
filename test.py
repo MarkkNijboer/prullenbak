@@ -7,4 +7,6 @@ GPIO.setup(sensorPin, GPIO.IN)
 
 while True:
     if GPIO.input(sensorPin) == GPIO.HIGH:
-        print "YAAAHHH!!";
+        print "YAAAHHH!!"
+    else:
+        print "NEEE"
