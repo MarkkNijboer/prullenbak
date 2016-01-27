@@ -22,6 +22,8 @@ def playSound(channel):
 
   # Check whether last time called was at least a second ago
   if called is None or called <= time.time() - 1:
+
+    print "Motion detected"
     # Get absolute path to 'sounds' folder
     directory = os.path.dirname(os.path.abspath(__file__))+"/sounds/"
     # Get random file from 'sounds' folder
